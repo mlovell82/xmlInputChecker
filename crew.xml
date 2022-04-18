@@ -1,4 +1,32 @@
 <medpratin>
-  <crew>
-  </crew>
+<crew>
+    <crew_label>Crew 1</crew_label>
+    <demographics>
+        <sex>Male</sex>
+        <contacts>0</contacts>
+        <eva>0</eva>
+        <cac>0</cac>
+        <pregnancy>0</pregnancy>
+    </demographics>
+</crew>
+<crew>
+    <crew_label>Crew 2</crew_label>
+    <demographics>
+        <sex>Male</sex>
+        <contacts>1</contacts>
+        <eva>0</eva>
+        <cac>0</cac>
+        <pregnancy>0</pregnancy>
+    </demographics>
+</crew>
+<crew>
+    <crew_label>Crew 3</crew_label>
+    <demographics>
+        <sex>Female</sex>
+        <contacts>0</contacts>
+        <eva>1</eva>
+        <cac>1</cac>
+        <pregnancy>0</pregnancy>
+    </demographics>
+</crew>
 </medpratin>
