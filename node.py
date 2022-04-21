@@ -22,6 +22,7 @@ class ParentNode:
   def validateNodes(self):
     for node in self.nodes:
       node.validate()
+    print(" ")
 
 class LeafStringNode(LeafNode):
     constraint = {
@@ -31,9 +32,9 @@ class LeafStringNode(LeafNode):
 
     def validate(self):
       if(len(self.value) < self.constraint["min"] or len(self.value) > self.constraint["max"]):
-        print(self.label, " must be greater than 0 characters and less than 250 characters!")
+        print(self.label + " must be greater than 0 characters and less than 255 characters!")
       else:
-        print(self.label, " validation successful!")
+        print(self.label + " validation successful!")
 
 class LeafEnumNode(LeafNode):
     def __init__(self, alabel, anode, amin, amax, astep):
@@ -46,12 +47,13 @@ class LeafEnumNode(LeafNode):
     }
 
     def validate(self):
-      if(self.value < self.constraint['min']):
-        print(self.label, " must be greater than or equal to ", self.constraint["min"])
-      elif(self.value > self.constraint['max']):
-        print(self.label, " must be less than or equal to ", self.constraint['max'])
-      else:
-        print(self.label, " validation successful!")
+      if(self != ""):
+        if(float(self.value) < self.constraint['min']):
+          print(self.label + " must be greater than or equal to " + str(self.constraint["min"]))
+        elif(float(self.value) > self.constraint['max']):
+          print(self.label + " must be less than or equal to " + str(self.constraint['max']))
+        else:
+          print(self.label + " validation successful!")
 
 class LeafEnum01Node(LeafNode):
     constraint = {
@@ -61,9 +63,9 @@ class LeafEnum01Node(LeafNode):
 
     def validate(self):
       if(self.value != self.constraint['min'] and self.value != self.constraint['max']):
-        print(self.label, " must equal ", self.constraint['min'], " or ", self.constraint['max'])
+        print(self.label + " must equal ", self.constraint['min'], " or ", self.constraint['max'])
       else:
-        print(self.label, " validation successful!")
+        print(self.label + " validation successful!")
 
 class LeafStringEnumStringNode(LeafNode):
     def __init__(self, alabel, avalue, aconstraints):
@@ -82,6 +84,16 @@ class LeafStringEnumStringNode(LeafNode):
         if(moreToGo < (len(self.constraints) -1)):
           allowableValues += ", "
       if(found != True):
-        print("Acceptable values are ", allowableValues)
+        print("Acceptable values are " + allowableValues)
       else:
-            print(self.getLabel()," validation successful!")
+            print(self.getLabel() + " validation successful!")
+
+class LeafBoolNode(LeafNode):
+  def __init__(self, alabel):
+    self.label = alabel
+    self.value = True
+
+  def validate(self):
+    print(self.getLabel() + " validation successful!")
+
+  
