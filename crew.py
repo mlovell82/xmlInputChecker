@@ -1,28 +1,17 @@
 from mimetypes import init
 import xml.etree.ElementTree as ET
-from node_class import *
+from node import *
 
 class Crew(ParentNode):
     def __init__(self, acrewschildren):
-        self.crew_label = LeafStringNode("crew_label", acrewschildren.find('crew_label'))
+        self.nodes = []
+        self.nodes.append(LeafStringNode("crew_label", acrewschildren.find('crew_label')))
+        
+        #get children of demographics
         self.demographics = acrewschildren.find('demographics')
-        self.sex = LeafStringEnumStringNode("sex", self.demographics.find('sex'), ["Male", "Female"])
-        self.contacts = LeafEnum01Node("contacts", self.demographics.find('contacts'))
-        self.eva = LeafEnum01Node("eva", self.demographics.find('eva'))
-        self.cac = LeafEnum01Node("cac", self.demographics.find('cac'))
-        self.pregnancy = LeafEnum01Node("pregnancy", self.demographics.find('pregnancy'))
-        self.nodes = [self.crew_label, self.sex, self.contacts, self.eva, self.cac, self.pregnancy]
-
-    def printLabel(self):
-        print(self.crew_label)     
-
-    def validateNodes(self):
-        print("VALIDATION FOR ", self.crew_label.getValue(), ": ")
-        for node in self.nodes:
-            node.validate()
-
-
-
-
-
-
+        self.nodes.append(LeafStringEnumStringNode("sex", self.demographics.find('sex'), ["MALE", "FEMALE"]))
+        self.nodes.append(LeafEnum01Node("contacts", self.demographics.find('contacts')))
+        self.nodes.append(LeafEnum01Node("crowns", self.demographics.find('crowns')))
+        self.nodes.append(LeafEnum01Node("eva", self.demographics.find('eva')))
+        self.nodes.append(LeafEnum01Node("cac", self.demographics.find('cac')))
+        self.nodes.append(LeafEnum01Node("pregnancy", self.demographics.find('pregnancy')))     
